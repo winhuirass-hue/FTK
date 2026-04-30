@@ -1,6 +1,3 @@
-
-# FTK
-The Flutter Toolkit
 # Flutter Toolkit (FTK)
 
 A lightweight starter toolkit for Flutter with reusable UI primitives.
