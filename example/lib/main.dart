@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_toolkit/flutter_toolkit.dart';
 
 void main() {
@@ -10,39 +10,29 @@ class ToolkitExampleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Toolkit Example',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        extensions: const [
-          ToolkitThemeExtension(
-            cornerRadius: 16,
-            defaultPadding: EdgeInsets.all(16),
-          ),
-        ],
-      ),
-      home: const _HomePage(),
-    );
-  }
-}
-
-class _HomePage extends StatelessWidget {
-  const _HomePage();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Toolkit')),
-      body: Center(
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Center(
         child: ToolkitCard(
+          style: const ToolkitStyle(
+            cornerRadius: 16,
+            padding: EdgeInsets.all(16),
+            backgroundColor: Color(0xFFEFEFEF),
+            borderColor: Color(0xFFCCCCCC),
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Ready-to-use UI primitives'),
+              const Text(
+                'Ready‑to‑use UI primitives',
+                style: TextStyle(fontSize: 16),
+              ),
               const ToolkitGap(12),
               ToolkitButton(
                 label: 'Press me',
-                onPressed: () {},
+                onPressed: () {
+                  // example action
+                },
               ),
             ],
           ),
