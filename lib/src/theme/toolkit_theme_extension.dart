@@ -1,32 +1,34 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
-@immutable
-class ToolkitThemeExtension extends ThemeExtension<ToolkitThemeExtension> {
+class ToolkitThemeExtension {
   const ToolkitThemeExtension({
     required this.cornerRadius,
     required this.defaultPadding,
+    required this.backgroundColor,
+    required this.foregroundColor,
   });
 
   final double cornerRadius;
   final EdgeInsets defaultPadding;
+  final Color backgroundColor;
+  final Color foregroundColor;
 
-  @override
   ToolkitThemeExtension copyWith({
     double? cornerRadius,
     EdgeInsets? defaultPadding,
+    Color? backgroundColor,
+    Color? foregroundColor,
   }) {
     return ToolkitThemeExtension(
       cornerRadius: cornerRadius ?? this.cornerRadius,
       defaultPadding: defaultPadding ?? this.defaultPadding,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      foregroundColor: foregroundColor ?? this.foregroundColor,
     );
   }
 
-  @override
-  ToolkitThemeExtension lerp(
-    covariant ThemeExtension<ToolkitThemeExtension>? other,
-    double t,
-  ) {
-    if (other is! ToolkitThemeExtension) {
+  ToolkitThemeExtension lerp(ToolkitThemeExtension? other, double t) {
+    if (other == null) {
       return this;
     }
 
@@ -34,14 +36,15 @@ class ToolkitThemeExtension extends ThemeExtension<ToolkitThemeExtension> {
       cornerRadius: lerpDouble(cornerRadius, other.cornerRadius, t) ?? cornerRadius,
       defaultPadding:
           EdgeInsets.lerp(defaultPadding, other.defaultPadding, t) ?? defaultPadding,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ?? backgroundColor,
+      foregroundColor: Color.lerp(foregroundColor, other.foregroundColor, t) ?? foregroundColor,
     );
   }
 
-  static ToolkitThemeExtension fallback(Brightness brightness) {
-    final isDark = brightness == Brightness.dark;
-    return ToolkitThemeExtension(
-      cornerRadius: 14,
-      defaultPadding: EdgeInsets.all(isDark ? 14 : 16),
-    );
-  }
+  static const ToolkitThemeExtension fallback = ToolkitThemeExtension(
+    cornerRadius: 14,
+    defaultPadding: EdgeInsets.all(14),
+    backgroundColor: Color(0xFFF2F2F2),
+    foregroundColor: Color(0xFF1A1A1A),
+  );
 }
